@@ -1,0 +1,111 @@
+body{
+    /* 用 cssgradient.io 設計背景 */
+    background: rgb(186,183,196);
+    background: linear-gradient(90deg, rgba(186,183,196,1) 51%, rgba(96,87,103,1) 100%);
+}
+
+.container-grid{
+    display: grid; /*格限排版 */
+    grid-template-areas: /*版面拼圖規則*/
+    'item1 item3 item4'
+    'item1 item5 item6'
+    'item2 item7 item8'
+    'item2 item9 item10';
+
+    grid-column-gap:10px ;  /*每個div間的空隙(垂直)*/
+    grid-row-gap: 10px; /*每個div間的空隙(水平)*/
+}
+
+.items{
+    padding: 30px; /*div高度*/
+    font-size: 30px;
+    color: rgb(0, 0, 0);
+    text-align: left;
+    border-radius: 10px;
+    background-color: rgb(227, 223, 223);
+}
+
+.item1{
+
+    grid-area: item1;  /*拼圖*/
+    text-align: center;
+    font-size: 40px;
+}
+
+.dropdown{
+    width: 200px;
+    height: 30px;
+}
+
+.item2{
+    grid-area: item2;  /*拼圖*/
+}
+#flag{
+    width:90%;
+}
+
+.item3{
+    grid-area: item3;  /*拼圖*/
+    display: flex;
+    align-items: center;
+}
+
+.item4{
+    grid-area: item4;  /*拼圖*/
+    display: flex;
+    align-items: center;
+}
+
+.item5{
+    grid-area: item5;  /*拼圖*/
+    display: flex;
+    align-items: center;
+}
+
+.item6{
+    grid-area: item6;  /*拼圖*/
+    display: flex;
+    align-items: center;
+}
+
+.item7{
+    grid-area: item7;  /*拼圖*/
+    display: flex;
+    align-items: center;
+}
+
+.item8{
+    grid-area: item8;  /*拼圖*/
+    display: flex;
+    align-items: center;
+}
+
+.item9{
+    grid-area: item9;  /*拼圖*/
+    display: flex;
+    align-items: center;
+}
+
+.item10{
+    grid-area: item10;  /*拼圖*/
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width:600px){  /*當螢幕寬小於600px就會套用以下css程式*/
+    .container-grid{
+        display: grid; /*格限排版 */
+        grid-template-areas: /*版面拼圖規則*/
+        'item1'
+        'item2'
+        'item3'
+        'item4'
+        'item5'
+        'item6'
+        'item7'
+        'item8'
+        'item9'
+        'item10';
+    }
+
+}
