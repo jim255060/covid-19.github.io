@@ -92,6 +92,12 @@ body{
     align-items: center;
 }
 
+.logo{
+    text-align: center;
+    font-weight: bolder;
+    color: rgb(0, 0, 0);
+}
+
 @media (max-width:600px){  /*當螢幕寬小於600px就會套用以下css程式*/
     .container-grid{
         display: grid; /*格限排版 */
