@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covid-19 簡易資訊網</title>
+
+    <link rel="stylesheet" href="style.css">
+    <!-- 連結FontAwesom小圖示 -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+</head>
+<body onload="countrySelect()">
+    <div class="container-grid"> <!--建立網頁的整個版面-->
+        <div class="items item1">
+            <h4>Covid-19 簡易資訊網</h4>
+            <select id="mySelect" class="dropdown" onchange="countrySelect()">  <!--下拉式選單-->
+                <!--選項-->
+                <option value="USA">美國</option>
+                <option value="Taiwan" selected>台灣</option>
+                <option value="Japan">日本</option>
+            </select>
+        </div>
+        <div class="items item2" style="text-align: center;">
+            <p style="font-size: 20px;" id="currentDate"></p> <!--日期-->
+            <span id="country"></span> <!--國家名稱-->
+            <img src="" id="flag"> <!--國旗-->
+        </div>
+        <div class="items item3">
+            <i class="fas fa-calendar-alt"></i> 今日確診：<span id="today"></span>
+        </div>
+        <div class="items item4">
+            <i class="far fa-meh"></i> 今日死亡：<span id="pass"></span>
+        </div>
+        <div class="items item5">
+            <i class="fas fa-child"></i> 總個數案：<span id="cases"></span>
+        </div>
+        <div class="items item6">
+            <i class="far fa-smile"></i> 活躍個數案：<span id="active"></span>
+        </div>
+        <div class="items item7">
+            <i class="fas fa-users"></i> 康復個數案：<span id="recovered"></span>
+        </div>
+        <div class="items item8">
+            <i class="fas fa-sync-alt"></i> 已測試數：<span id="tested"></span>
+        </div>
+        <div class="items item9">
+            <i class="fas fa-list-alt"></i> 總死亡數：<span id="death"></span>
+        </div>
+        <div class="items item10">
+            <i class="fas fa-times-circle"></i> 死亡率：<span id="rate"></span>
+        </div>
+    </div>
+    <div class="logo">
+        <p>Jim's Web</p>
+    </div>
+</body>
+</html>
+
+<script type="text/javascript">
+
+    // 日期
+    let d = new Date();
+    let dateObj = new Date();
+    let month = ('0' + (dateObj.getMonth() + 1)).slice(-2);
+    let date = ('0' + dateObj.getDate()).slice(-2);
+    let year = dateObj.getFullYear();
+    let shortDate = year + '年' + month + '月' + date + '日';
+
+
+    document.getElementById("currentDate").innerHTML = "日期：" + shortDate;
+
+    //搜尋
+
+    $('select').chosen();
+
+    function countrySelect(){
+
+        let x=document.getElementById("mySelect").value;
+
+        //API資料來源
+        let link = "https://disease.sh/v3/covid-19/countries/"+x;
+
+        fetch(link)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                var total=parseFloat(data.cases);
+                var pass=parseFloat(data.deaths);
+                var rate=((pass/total).toFixed(4))*100+'%';
+
+                document.getElementById("country").innerHTML=data.country;
+                document.getElementById("today").innerHTML=data.todayCases.toLocaleString();
+                document.getElementById("pass").innerHTML=data.todayDeaths.toLocaleString();
+                document.getElementById("active").innerHTML=data.active.toLocaleString();
+                document.getElementById("cases").innerHTML=data.cases.toLocaleString();
+                document.getElementById("rate").innerHTML=rate;
+                document.getElementById("death").innerHTML=data.deaths.toLocaleString();
+                document.getElementById("recovered").innerHTML=data.recovered.toLocaleString();
+                document.getElementById("tested").innerHTML=data.tests.toLocaleString();
+                document.getElementById("flag").src=data.countryInfo.flag;
+            });
+    }
+
+</script>
